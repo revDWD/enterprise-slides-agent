@@ -1,0 +1,20 @@
+{
+  "_comment": "Overrides the agent's default style. Palette values are inspiration, not official brand values.",
+  "palette": {
+    "coral": "E65050",
+    "teal": "3EB3B5",
+    "yellow": "FADD60",
+    "navy": "143565",
+    "ink": "1A1A1A"
+  },
+  "fonts": {
+    "handwriting": "",
+    "handwritingEmbeddable": false,
+    "body": ""
+  },
+  "sizes": { "titlePt": 32, "bodyPt": 18, "minPt": 12 },
+  "doodles": { "maxPerSlide": 3, "lineWeightPt": 3.5 },
+  "defaultTemplate": "",
+  "footerText": "",
+  "classificationLabel": ""
+}
