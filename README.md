@@ -17,13 +17,27 @@ from your **pre-approved `.pptx`/`.potx` templates**.
 ## Install (Windows)
 
 ```powershell
-git clone https://github.com/DWDyck/enterprise-slides-agent
+git clone https://github.com/GitDdyck/enterprise-slides-agent
 cd enterprise-slides-agent
 .\install.ps1
 ```
 
-Requires Python 3.12+ (`winget install Python.Python.3.12 --scope user`). Packages: `python-pptx`, `lxml`, `Pillow`.
-Restart Copilot so it discovers the agent.
+Requires Python 3.12+ from an approved software channel. The installer creates an isolated
+per-user environment at `~/.copilot/slide-assets/venv`, installs the pinned packages in
+`requirements.txt`, and runs the smoke test. It does not elevate privileges or install packages
+machine-wide. If the package install or test fails, the installer stops and reports the failure.
+If your approved package source is configured through pip, the installer uses that configuration;
+it does not try another source if access is blocked. Restart Copilot so it discovers the agent.
+
+### Enterprise data handling
+
+Before using real work material, confirm with your organization that the signed-in Copilot
+account/tenant, selected model, and VS Code agent harness are approved for that material's
+classification. If this is uncertain, use sanitized sample content and ask your IT/security team
+before proceeding. The agent instructions are guidance, not an enforcement boundary: local
+PowerPoint/Python processing does not by itself mean prompts or supplied content stay local.
+Use only templates and assets approved for the selected environment; do not commit company
+templates, generated decks, or confidential content to this repository.
 
 ## Customise
 
@@ -43,5 +57,9 @@ Put these in `~/.copilot/slide-assets/`:
 ## Test
 
 ```powershell
-python tests\smoke_test.py
+& "$env:USERPROFILE\.copilot\slide-assets\venv\Scripts\python.exe" tests\smoke_test.py
 ```
+
+The GitHub Actions smoke test uses a GitHub-hosted Windows runner. Enable or rely on that cloud
+CI only if repository code is permitted to run in that environment; otherwise run the local test
+with the approved Python environment above.
